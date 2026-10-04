@@ -1105,11 +1105,24 @@
             document.getElementById('processingOverlay').classList.remove('hidden');
             
             try {
-                // Robust parsing for QR formats
-                let cleanText = decodedText.replace(/[\r\n]+/g, '\n').replace(/\|/g, '\n');
+                // CEK JIKA DATABASE KOSONG
+                if (!MOCK_DB.DATA_SISWA || MOCK_DB.DATA_SISWA.length === 0) {
+                    throw new Error("DATABASE_KOSONG");
+                }
+
+                // SUPER PARSER: MENANGANI SEGALA FORMAT BARIS BARU DARI QR CODE
+                let cleanText = decodedText
+                    .replace(/\\n/g, '\n')      // Ganti teks \n literal
+                    .replace(/\\r/g, '\n')      // Ganti teks \r literal
+                    .replace(/%0A/gi, '\n')     // Ganti encoding enter URL
+                    .replace(/[\r\n]+/g, '\n')  // Ganti enter/carriage return asli
+                    .replace(/\|/g, '\n');      // Ganti simbol pipa jika ada
+                    
                 let parts = cleanText.split('\n').map(p => p.trim()).filter(p => p.length > 0);
                 
                 if (parts.length < 1) throw new Error("Format QR Kosong");
+                
+                // Ekstrak baris pertama sebagai NISN, bersihkan dari spasi/karakter tak diundang
                 const nisn = parts[0].replace(/[^0-9a-zA-Z]/g, ''); 
                 
                 const actSelectId = document.getElementById('scanActivitySelect').value;
