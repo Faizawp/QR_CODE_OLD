@@ -1682,7 +1682,7 @@
                 let stat = document.getElementById(`bulk_stat_${s.nisn}`).value;
                 let ket = document.getElementById(`bulk_ket_${s.nisn}`).value || "-";
                 if (stat !== 'Kosong') {
-                    payload.push({ id: (isOnline?"ABS_MAN_":"ABS_OFF_MAN_") + Date.now() + Math.random().toString(36).substr(2,4), timestamp: newtoISOString(), tanggal: dt, jam: jam, nisn: s.nisn, nama: s.nama, kelas: s.kelas, status: stat, keterangan: ket, aktivitas: absenActs[0].nama, idAktivitas: absenActs[0].id });
+                    payload.push({ id: (isOnline?"ABS_MAN_":"ABS_OFF_MAN_") + Date.now() + Math.random().toString(36).substr(2,4),  timestamp: new Date().toISOString(), tanggal: dt, jam: jam, nisn: s.nisn, nama: s.nama, kelas: s.kelas, status: stat, keterangan: ket, aktivitas: absenActs[0].nama, idAktivitas: absenActs[0].id });
                 }
             });
 
