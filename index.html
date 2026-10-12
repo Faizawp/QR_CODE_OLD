@@ -1514,7 +1514,7 @@
             document.getElementById('statTotalSiswa').textContent = total;
             document.getElementById('statHadir').textContent = had;
             document.getElementById('statTerlambat').textContent = ter;
-            document.getElementById('statTidakHadir').textContent = alp;
+            document.getElementById('statTidakHadir').textContent = alp, sak, izn;
 
             const activeAct = MOCK_DB.AKTIVITAS.filter(a => a.status === 'Aktif')[0];
             document.getElementById('dashActiveActivity').textContent = activeAct ? activeAct.nama : "Belum Ada";
